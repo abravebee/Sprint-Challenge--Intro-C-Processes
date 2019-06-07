@@ -10,7 +10,9 @@ int main(int argc, char **argv)
     //argc and argv
     //check argv[1] for path
     char *dir;
-
+    DIR *wideopendir;
+    struct dirent ent;
+    struct stat buf;
 
     if (argc == 2){
         dir = argv[1];
@@ -23,6 +25,7 @@ int main(int argc, char **argv)
 
   // Open directory
   // 1. CALL opendir(char *path)
+    wideopendir = opendir(dir);
     // opens directory named in path (e.g. '.')
     // returns pointer to variable type DIR
     // error returns NULL
@@ -39,6 +42,10 @@ int main(int argc, char **argv)
   // 3. PRINT FILENAMES
     // printf("%s\n", ent->d_name)
     // per above, break at NULL
+    //For each entry in a directory, your program should print its size in bytes. 
+    // int stat(char *fullpath, struct stat *buf)
+    // fill fields of struct stat
+    // returns -1 on error
 
 
   // Close directory
