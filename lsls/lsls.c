@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 /**
  * Main
@@ -12,8 +13,8 @@ int main(int argc, char **argv)
     //check argv[1] for path
     char *dir;
     DIR *wideopendir;
-    //struct dirent *ent;
-    //struct stat buf;
+    struct dirent *ent;
+    struct stat buf;
 
     if (argc == 2){
         dir = argv[1];
@@ -43,20 +44,24 @@ int main(int argc, char **argv)
     // reads next dir entry from 'DIR' returned by opendir()
     // returns pointer to struct dirent (ent = readdir(d))
     // returns NULL at end
-
-
-  // 3. PRINT FILENAMES
+  while((ent = readdir(wideopendir))!= NULL) {
+       // 3. PRINT FILENAMES
     // printf("%s\n", ent->d_name)
     // per above, break at NULL
     //For each entry in a directory, your program should print its size in bytes. 
     // int stat(char *fullpath, struct stat *buf)
     // fill fields of struct stat
     // returns -1 on error
+      stat(ent->d_name, &buf);
+      printf("%10ld %s\n", buf.st_size, ent->d_name);
+  }    
+
 
 
   // Close directory
   // 4. CALL closedir(DIR *d)
     // close previously opened directory
+    closedir(wideopendir);
 
   return 0;
 }
