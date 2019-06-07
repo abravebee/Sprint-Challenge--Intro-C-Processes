@@ -9,7 +9,17 @@ int main(int argc, char **argv)
   // Parse command line
     //argc and argv
     //check argv[1] for path
+    char *dir;
 
+
+    if (argc == 2){
+        dir = argv[1];
+    } else if (argc == 1){
+        dir = ".";
+    } else {
+        fprintf(stderr, "Invalid argument, please try again\n");
+        exit(1);
+    }
 
   // Open directory
   // 1. CALL opendir(char *path)
