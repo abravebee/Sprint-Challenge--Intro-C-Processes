@@ -56,8 +56,6 @@ int main(int argc, char **argv)
       printf("%10ld %s\n", buf.st_size, ent->d_name);
   }    
 
-
-
   // Close directory
   // 4. CALL closedir(DIR *d)
     // close previously opened directory
