@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <dirent.h>
+#include <stdlib.h>
 
 /**
  * Main
@@ -11,8 +12,8 @@ int main(int argc, char **argv)
     //check argv[1] for path
     char *dir;
     DIR *wideopendir;
-    struct dirent ent;
-    struct stat buf;
+    //struct dirent *ent;
+    //struct stat buf;
 
     if (argc == 2){
         dir = argv[1];
@@ -29,7 +30,12 @@ int main(int argc, char **argv)
     // opens directory named in path (e.g. '.')
     // returns pointer to variable type DIR
     // error returns NULL
+    if (wideopendir == NULL){
         //print error message, exit()
+        fprintf(stderr, "Directory does not exist\n");
+        exit(1);
+    }
+        
 
 
   // Repeatly read and print entries
