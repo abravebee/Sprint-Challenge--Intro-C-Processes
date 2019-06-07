@@ -40,25 +40,20 @@ int main(int argc, char **argv)
 
 
   // Repeatly read and print entries
-  // 2. CALL readdir(DIR *d)
+  // 2. CALL readdir(DIR *d)    
+    while((ent = readdir(wideopendir))!= NULL) {
     // reads next dir entry from 'DIR' returned by opendir()
     // returns pointer to struct dirent (ent = readdir(d))
     // returns NULL at end
-  while((ent = readdir(wideopendir))!= NULL) {
-       // 3. PRINT FILENAMES
-    // printf("%s\n", ent->d_name)
-    // per above, break at NULL
+  // 3. PRINT FILENAMES
+    stat(ent->d_name, &buf);
+    printf("%10ld %s\n", buf.st_size, ent->d_name);
     //For each entry in a directory, your program should print its size in bytes. 
-    // int stat(char *fullpath, struct stat *buf)
     // fill fields of struct stat
-    // returns -1 on error
-      stat(ent->d_name, &buf);
-      printf("%10ld %s\n", buf.st_size, ent->d_name);
-  }    
+        
+    }    
 
   // Close directory
-  // 4. CALL closedir(DIR *d)
-    // close previously opened directory
     closedir(wideopendir);
 
   return 0;
